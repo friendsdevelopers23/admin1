@@ -1,0 +1,277 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<style type="text/css">
+    .top_rw {
+        background-color: #f4f4f4;
+    }
+    .td_w {}
+    button {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+    .invoice-box {
+        max-width: 100%;
+        margin: auto;
+        padding: 10px;
+        border: 1px solid #eee;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+        font-size: 14px;
+        line-height: 24px;
+        font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        color: #555;
+    }
+    .invoice-box table {
+        width: 100%;
+        line-height: inherit;
+        text-align: left;
+        border-bottom: solid 1px #ccc;
+    }
+    .invoice-box table td {
+        padding: 5px;
+        vertical-align: middle;
+    }
+    .invoice-box table tr td:nth-child(2) {
+        text-align: right;
+    }
+    .invoice-box table tr.top table td {
+        padding-bottom: 20px;
+    }
+    .invoice-box table tr.top table td.title {
+        font-size: 45px;
+        line-height: 45px;
+        color: #333;
+    }
+    .invoice-box table tr.information table td {
+        padding-bottom: 40px;
+    }
+    .invoice-box table tr.heading td {
+        background: #eee;
+        border-bottom: 1px solid #ddd;
+        font-weight: bold;
+        font-size: 12px;
+    }
+    .invoice-box table tr.details td {
+        padding-bottom: 20px;
+    }
+    .invoice-box table tr.item td {
+        border-bottom: 1px solid #eee;
+    }
+    .invoice-box table tr.item.last td {
+        border-bottom: none;
+    }
+    .invoice-box table tr.total td:nth-child(2) {
+        border-top: 2px solid #eee;
+        font-weight: bold;
+    }
+    @media only screen and (max-width: 600px) {
+        .invoice-box table tr.top table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+        .invoice-box table tr.information table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+    }
+    /** RTL **/
+    .rtl {
+        direction: rtl;
+        font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    }
+    .rtl table {
+        text-align: right;
+    }
+    .rtl table tr td:nth-child(2) {
+        text-align: left;
+    }
+</style>
+</head>
+
+<body>
+<div class="invoice-box">
+    
+<table cellpadding="0" cellspacing="0">
+        
+<tbody>
+<tr class="top_rw">
+            
+<td colspan="2">
+                
+<h2 style="margin-bottom: 0px;text-align:center"> Tax invoice</h2>
+               
+            </td>
+            
+
+        </tr>
+        
+<tr class="top">
+            
+<table  style="width: 100%;" cellspacing="0" cellpadding="0" style="margin: 10px 0px;">
+                
+<tbody>
+                    
+<tr>
+                        
+
+                        
+<td style="    text-align: left; width: 50%; font-size: 13px; vertical-align: top;">
+                            
+<div style="margin-right: 20px;">
+                                <span style="font-size: 14px;"><b>Billing Address</b></span>
+                                
+<p>
+                                    <span id="lblbName" th:text="${order.salesFlatOrderAddress[0].firstName}"></span>.
+                                    <span id="lblbName" th:text="${order.salesFlatOrderAddress[0].lastName}"></span> <br />
+                                    <span id="lblbAddress1" th:text="${order.salesFlatOrderAddress[0].street}"><br /></span>
+                                    <span id="lblbCity" th:text="${order.salesFlatOrderAddress[0].city}"></span>
+                                    <span id="lblbState" th:text="${order.salesFlatOrderAddress[0].postCode}"></span>,
+                                     <span id="lblbState" th:text="${order.salesFlatOrderAddress[0].region}"></span>,<br />
+                                     Phone Number : <span id="lblbState" th:text="${order.salesFlatOrderAddress[0].telephone}"></span>
+                                  
+                                </p>
+                            </div>
+                        </td>
+                        
+<td style="text-align: left;width: 50%; font-size: 13px; vertical-align: top;">
+                            
+<div style="margin-right: 0px;">
+                                <span style="font-size: 14px;"><b>Shipping Address</b></span>
+                                
+<p><span id="lblbName" th:text="${order.salesFlatOrderAddress[0].firstName}"></span>.
+                                    <span id="lblbName" th:text="${order.salesFlatOrderAddress[0].lastName}"></span> <br />
+                                    <span id="lblbAddress1" th:text="${order.salesFlatOrderAddress[0].street}"><br /></span>
+                                    <span id="lblbCity" th:text="${order.salesFlatOrderAddress[0].city}"></span>
+                                    <span id="lblbState" th:text="${order.salesFlatOrderAddress[0].postCode}"></span>,
+                                      <span id="lblbState" th:text="${order.salesFlatOrderAddress[0].region}"></span>,<br />
+                                     Phone Number : <span id="lblbState" th:text="${order.salesFlatOrderAddress[0].telephone}"></span>
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </tr>
+        
+<tr class="information">
+            
+<td colspan="3">
+                
+<table>
+                    
+<tbody>
+<tr>
+                    </tr>
+                </tbody></table>
+            </td>
+        </tr>
+        
+<tr>
+<td colspan="3">
+            
+<table cellspacing="0px" cellpadding="2px">
+                
+<tbody>
+<tr class="heading">
+                    
+<td style="width: 25%;">
+                        S.NO
+                    </td>
+                    <td style="width: 25%;">
+                        Name
+                    </td>
+                    
+<td style="width: 10%; text-align: center;">
+                        QTY.
+                    </td>
+                    
+<td style="width: 10%; text-align: right;">
+                        PRICE 
+                    </td>
+                    
+<td style="width: 15%; text-align: right;">
+                        TAX RATE &amp; TYPE
+                    </td>
+                    
+<td style="width: 15%; text-align: right;">
+                        TAX AMOUNT (INR)
+                    </td>
+                    
+<td style="width: 15%; text-align: right;">
+                        TOTAL AMOUNT (INR)
+                    </td>
+                </tr>
+                
+<tr th:each="orderItem : ${orderItemList}" class="item">
+<td style="width: 25%;">
+                   <td th:text="${iterator.indexOf(orderItem)}"></td>
+                    </td>
+                    
+<td style="width: 25%;">
+                      <span data-th-text="${orderItem.name}"></span>
+                    </td>
+                    
+<td style="width: 10%; text-align: center;">
+                        <span data-th-text="${orderItem.qty}"></span>
+                    </td>
+                    
+<td style="width: 10%; text-align: right;">
+                       <span data-th-text="${orderItem.price}"></span>
+                    </td>
+                    
+<td style="width: 15%; text-align: right;">
+                      <span data-th-text="${orderItem.taxPercent}"></span>
+                        <span >%</span>
+                    </td>
+                    
+<td style="width: 15%; text-align: right;">
+                      <span data-th-text="${orderItem.taxAmount}"></span>
+                    </td>
+                    
+<td style="width: 15%; text-align: right;">
+                         <span data-th-text="${orderItem.rowTotal}"></span>
+                    </td>
+                </tr>
+                
+
+        
+    </tbody></table>
+    
+<tr class="total">
+
+        
+<td colspan="3" align="right"> Total Amount  : <b> <span th:text="${order.grandTotal}"></span></b> </td>
+    </tr>
+    
+   
+<tr>
+        
+<td colspan="3">
+            
+<table cellspacing="0px" cellpadding="2px">
+                
+<tbody>
+<tr>
+                    
+<td width="100%">
+                        <b> Declaration: </b> <br />
+                        We declare that this invoice shows the actual price of the goods
+                        described above and that all particulars are true and correct. The
+                        goods sold are intended for end user consumption and not for resale.
+                    </td>
+                    
+
+                </tr>
+                
+<tr>
+                    
+
+
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+    </tbody></table></div>
+</body>
+</html>

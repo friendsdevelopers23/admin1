@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/non-responsive.css" rel="stylesheet"/>
+
+    <!-- Bootstrap Dropdown Hover CSS -->
+    <link href="/css/animate.min.css" rel="stylesheet"/>
+    <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet"/>
+
+    <link href="/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <link href="/css/style.css" rel="stylesheet"/>
+<style>
+
+th:first-child {
+  border-top-left-radius: 5px;
+  text-align: left;
+}
+th:last-child {
+  border-top-right-radius: 5px;
+}
+tbody tr:nth-child(even) {
+  background: #f0f0f2;
+}
+
+td:first-child {
+  border-left: 1px solid #cecfd5;
+}
+
+tfoot tr:last-child {
+  background: #f0f0f2;
+  color: #395870;
+  font-weight: bold;
+}
+tfoot tr:last-child td:first-child {
+  border-bottom-left-radius: 5px;
+}
+tfoot tr:last-child td:last-child {
+  border-bottom-right-radius: 5px;
+} 
+</style>
+
+</head>
+<body>
+<p>Hi <span th:text="${order.customerFirstname}"></span>,</p>
+<p>Your order has been successfully placed</p>
+<p>Your order number is: <strong>#<span th:text="${order.entityId}"></span></strong>. Here is your order detail:</p>
+<h2>Order Detail for purchase #<span th:text="${order.createdDate}"></span></h2>
+<hr/>
+
+<table style="table-layout: fixed;border-collapse: collapse; width: 100%;">
+    <tr>
+     <th align="left" >Status</th>
+        <th align="left" >Billing Details</th>
+    </tr>
+    <tr>
+      <td style="width:70%;" >
+      <img src="https://ci4.googleusercontent.com/proxy/kEYhoZr5WYwGswGbrtaies_zHFOqa0MI5U5JbfgopQ4XZ3Y3XDIqWK9yRA78HEHDt13SwQuRLud6Z7uuLey8cxXrkv-twYGZbuXTdXTJgJDKvo-nvt4vU4dJ9i8JN1B1NOMRexJjN5-F3EVuicWmhmjhbW6piY1or5uRopM=s0-d-e1-ft#https://rukminim1.flixcart.com/www/270/28/promos/
+      07/03/2018/f0e74e39-2481-4e34-b8f6-d2ab80ac15fe.png?q=100" alt="journey" style="margin-bottom:20px" class="CToWUd">
+           
+        </td>
+        <td style="width:30%;">
+            <span th:text="${order.salesFlatOrderAddress[0].firstName}"></span><br/>
+            <span th:text="${order.salesFlatOrderAddress[0].street}"></span><br/>
+            <span th:text="${order.salesFlatOrderAddress[0].city}"></span><br/>
+            <span th:text="${order.status}"></span><br/>
+            <span th:text="${order.salesFlatOrderAddress[0].postCode}"></span><br/>
+        </td>
+    </tr>
+</table >
+<hr/>
+<h3><strong>Order summary</strong></h3>
+	<table style=" border-collapse: separate;
+  border-spacing: 0;
+  color: #4a4a4d;
+  font: 14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;">
+  <thead style="background: #395870;
+  background: linear-gradient(#49708f, #293f50);
+  color: #fff;
+  font-size: 11px;
+  text-transform: uppercase;">
+    <tr >
+      <th style=" padding: 10px 15px;	
+  vertical-align: middle;" scope="col">Item Name</th>
+      <th style=" padding: 10px 15px;
+  vertical-align: middle;" scope="col">Qty</th>
+      <th style=" padding: 10px 15px;
+  vertical-align: middle;" scope="col"> Price</th>
+      <th style=" padding: 10px 15px;
+  vertical-align: middle;" scope="col"> total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="cartItem : ${cartItemList}">
+      <td style=" padding: 10px 15px;   border-bottom: 1px solid #cecfd5;
+  border-right: 1px solid #cecfd5;
+  vertical-align: middle;">
+        <strong style="color: #395870;
+  display: block;"><span data-th-text="${cartItem.name}"></span></strong>
+      </td>
+      <td  style=" padding: 10px 15px;   border-bottom: 1px solid #cecfd5;
+  border-right: 1px solid #cecfd5;
+  vertical-align: middle;" data-th-text="${cartItem.qty}" class="item-qty"></td>
+      <td style=" padding: 10px 15px;   border-bottom: 1px solid #cecfd5;
+  border-right: 1px solid #cecfd5;
+  vertical-align: middle;" data-th-text="${cartItem.price}"></td>
+       <td style=" padding: 10px 15px;   border-bottom: 1px solid #cecfd5;
+  border-right: 1px solid #cecfd5;
+  vertical-align: middle;" data-th-text="${cartItem.rowTotalInclTax}"></td>
+    </tr>
+  </tbody>
+  <tfoot style=" text-align: right;">
+    <tr  style="color: #7c7c80;
+  font-size: 12px;">
+      <td style=" padding: 10px 15px;   border-bottom: 1px solid #cecfd5;
+  border-right: 1px solid #cecfd5;
+  vertical-align: middle;" colspan="3">Subtotal</td>
+      <td  style=" padding: 10px 15px;   border-bottom: 1px solid #cecfd5;
+  border-right: 1px solid #cecfd5;
+  vertical-align: middle;" data-th-text="${order.grandTotal}"></td>
+    </tr>
+    <tr  style="color: #7c7c80;
+  font-size: 12px;">
+      <td style=" padding: 10px 15px;   border-bottom: 1px solid #cecfd5;
+  border-right: 1px solid #cecfd5;
+  vertical-align: middle;" colspan="3">Tax</td>
+      <td style=" padding: 10px 15px;   border-bottom: 1px solid #cecfd5;
+  border-right: 1px solid #cecfd5;
+  vertical-align: middle;">5%</td>
+    </tr>
+    <tr>
+      <td style=" padding: 10px 15px;   border-bottom: 1px solid #cecfd5;
+  border-right: 1px solid #cecfd5;
+  vertical-align: middle;" colspan="3">Total</td>
+     <td style=" padding: 10px 15px;   border-bottom: 1px solid #cecfd5;
+  border-right: 1px solid #cecfd5;
+  vertical-align: middle;" data-th-text="${order.grandTotal}"></td>
+    </tr>
+  </tfoot>
+</table>
+<br/>
+<p>Best,</p>
+<p>Menakart</p>
+</body>
+</html>

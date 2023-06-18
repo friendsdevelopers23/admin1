@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.calsoft.base</groupId>
+	<artifactId>base-pom</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.0.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+	<modules>
+		<module>base-lib-commons</module>
+		<module>base-lib-model</module>
+		<module>base-lib-search</module>
+		<module>base-lib-rule-engine</module>
+		<module>pos-svc-core</module>
+		<module>pos-svc-sales</module>
+		<module>pos-svc-catalog</module>
+		<module>pos-svc-admin</module>
+		<module>pos-svc-queue</module>
+		<module>pos-svc-deploy</module>
+		<module>pos-svc-billing</module>
+	<!--	<module>pos-gateway</module> -->
+	</modules>
+	<!-- Declare Dependencies here which later has to referenced by modules 
+		which need them ! -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.calsoft.base</groupId>
+				<artifactId>base-lib-model</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.calsoft.base</groupId>
+				<artifactId>base-lib-commons</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.calsoft.base</groupId>
+				<artifactId>base-lib-search</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.calsoft.base</groupId>
+				<artifactId>base-lib-rule-engine</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<!-- Declare Common Dependencies here which will be used by all the modules 
+		! -->
+	<dependencies>
+		<!-- Spring Boot Related Dependencies -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.tomcat</groupId>
+					<artifactId>tomcat-jdbc</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-solr</artifactId>
+		</dependency>
+		<!-- Other Dependencies -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.4.0</version>
+		</dependency>
+	</dependencies>
+</project>

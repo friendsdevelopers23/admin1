@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head />
+<body style="position: relative; min-height: 100%; font-family: kalinga; margin: 0px;">
+
+<div class="aspNetHidden">
+    <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="DB6E5054" /></div>
+        
+<div class="wrapper" style="max-width: 100%; margin: 0px auto; font-family: kalinga;">
+    
+    <h3 style="text-align:center;border-bottom: 1px solid rgb(51, 51, 51); padding-bottom: 3px;padding-top: 10px; width: 100%;"> Tax invoice</h3>        
+
+<table cellspacing="0" cellpadding="0" style="margin: 10px 0px; border: 1px solid;">
+                
+<tbody>
+                    
+<tr>
+                        
+<td valign="top" style="width: 20%;">
+                            
+<div style="float: left; font-size: 12px;">
+                                <span style="font-weight: bold; font-size: 13px;">Order ID &nbsp;:&nbsp;</span><span id="lblOrderId" th:text="${order.extOrderId}"></span><br />
+                                <br />
+                                <span style="font-weight: bold; font-size: 13px;">Order Date&nbsp;:&nbsp;</span><span id="lblOrderDate" th:text="${orderPlacedDate}"></span>
+                            </div>
+                        </td>
+                        
+<td style="width: 22%; font-size: 13px; vertical-align: top;padding-left: 5px;">
+                            
+<div style="margin-right: 20px;">
+                                <span style="font-size: 14px;"><b>Billing Address</b></span>
+                                
+<p>
+                                    <span id="lblbName" th:text="${order.salesFlatOrderAddress[0].firstName}"></span>.
+                                    <span id="lblbName" th:text="${order.salesFlatOrderAddress[0].lastName}"></span> <br />
+                                    <span id="lblbAddress1" th:text="${order.salesFlatOrderAddress[0].street}"><br /></span>
+                                    <span id="lblbCity" th:text="${order.salesFlatOrderAddress[0].city}"></span>
+                                    <span id="lblbState" th:text="${order.salesFlatOrderAddress[0].postCode}"></span>,
+                                     <span id="lblbState" th:text="${order.salesFlatOrderAddress[0].region}"></span>,<br />
+                                     Phone Number : <span id="lblbState" th:text="${order.salesFlatOrderAddress[0].telephone}"></span>
+                                  
+                                </p>
+                            </div>
+                        </td>
+                        
+<td style="width: 22%; font-size: 13px; vertical-align: top;">
+                            
+<div style="margin-right: 0px;">
+                                <span style="font-size: 14px;"><b>Shipping Address</b></span>
+                                
+<p><span id="lblbName" th:text="${order.salesFlatOrderAddress[0].firstName}"></span>.
+                                    <span id="lblbName" th:text="${order.salesFlatOrderAddress[0].lastName}"></span> <br />
+                                    <span id="lblbAddress1" th:text="${order.salesFlatOrderAddress[0].street}"><br /></span>
+                                    <span id="lblbCity" th:text="${order.salesFlatOrderAddress[0].city}"></span>
+                                    <span id="lblbState" th:text="${order.salesFlatOrderAddress[0].postCode}"></span>,
+                                      <span id="lblbState" th:text="${order.salesFlatOrderAddress[0].region}"></span>,<br />
+                                     Phone Number : <span id="lblbState" th:text="${order.salesFlatOrderAddress[0].telephone}"></span>
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <span id="lbldetails" />
+<table cellspacing="0" cellpadding="0" style="border-collapse: collapse;
+  width: 100%; border-left: 1px solid rgb(51, 51, 51);border-right: 1px solid rgb(51, 51, 51); ">
+                
+<tbody>
+                    
+<tr style="padding-left: 5px;"> 
+  <th style=" padding: 4px 4px; border-bottom: 1px solid rgb(51, 51, 51);border-top: 1px solid rgb(51, 51, 51); font-size: 14px;border-bottom: 1px solid rgb(51, 51, 51);">S.No</th>                  
+<th style=" padding: 4px 4px;border-bottom: 1px solid rgb(51, 51, 51);border-top: 1px solid rgb(51, 51, 51); font-size: 14px; max-width: 280px;">Product</th>
+                        
+
+<th style=" padding: 4px 4px;border-bottom: 1px solid rgb(51, 51, 51);border-top: 1px solid rgb(51, 51, 51);  font-size: 14px;">Qty</th>
+
+<th style=" padding: 4px 4px; border-bottom: 1px solid rgb(51, 51, 51);border-top: 1px solid rgb(51, 51, 51);  font-size: 14px;"> MRP</th>
+
+<th style=" padding: 4px 4px; border-bottom: 1px solid rgb(51, 51, 51);border-top: 1px solid rgb(51, 51, 51);  font-size: 14px;"> Price</th>
+
+
+<th style=" padding: 4px 4px;border-bottom: 1px solid rgb(51, 51, 51);border-top: 1px solid rgb(51, 51, 51);  font-size: 14px;"> Total</th>
+                        
+                                     
+<th id="thGSTlbl" style=" padding: 4px 4px;border-bottom: 1px solid rgb(51, 51, 51);border-top: 1px solid rgb(51, 51, 51);  font-size: 14px;">GST %</th>
+
+<th id="thGSTlbl" style=" padding: 4px 4px;border-bottom: 1px solid rgb(51, 51, 51);border-top: 1px solid rgb(51, 51, 51);  font-size: 14px;">GST Amt</th>
+                        
+<th style=" padding: 4px 4px;border-bottom: 1px solid rgb(51, 51, 51);border-top: 1px solid rgb(51, 51, 51);  font-size: 14px;">Amount</th>        </tr>
+                </tbody>
+                
+<tbody>
+                   
+<tr th:each="orderItem,iterator  : ${orderItemList}">
+<td style="padding: 4px 4px; font-size: 14px;" th:text="${iterator.index+1}"></td> 
+
+<td style="padding: 4px 4px; font-size: 14px; max-width: 285px;">
+<span data-th-text="${orderItem.name}"></span>
+</td>
+
+
+
+<td style="padding: 4px 4px;">
+<span data-th-text="${orderItem.qty}"></span>
+</td>
+
+<td style="padding: 4px 4px;">
+<span data-th-text="${orderItem.basePrice}"></span>
+
+</td>
+
+<td style="padding: 4px 4px;">
+<span data-th-text="${orderItem.price}"></span>
+
+</td>
+
+
+
+<td style="padding: 4px 4px;">
+
+<div th:with="result1=${(orderItem.price - orderItem.taxAmount)*orderItem.qty}">
+  <span th:text="${result1}"></span>
+</div>
+</td>
+
+
+<td style="padding: 4px 4px; ">
+ <span data-th-text="${orderItem.taxPercent}"></span>
+</td>
+
+<td style="padding: 4px 4px;">
+ <span data-th-text="${orderItem.taxAmount}"></span>
+</td>
+<td style="padding: 4px 4px;">
+<span data-th-text="${orderItem.rowTotal}"></span>
+</td></tr>
+                </tbody>
+            </table>
+            
+            
+<div style="border-bottom: 1px solid rgb(51, 51, 51); border-top: 1px solid rgb(51, 51, 51); padding: 10px 0px;">
+                <span style="display: inline-block; font-size: 14px; width: 75%; text-align: right;"><b>Sub Total</b></span>
+                <span style="float: right; font-size: 14px; text-align: right; font-weight: bold;">
+            
+                 <span  th:text="${currency}"></span>
+                     <span id="lblSubTotal" th:text="${order.subtotal}"></span>
+                </span>
+            </div>
+            
+<div id="divShippingCharges" style="padding: 10px 0px;">
+                <span style="display: inline-block; font-size: 14px; width: 75%; text-align: right;"><b>Shipping Charges</b></span>
+                <span style="float: right; font-size: 14px; text-align: right; font-weight: bold;">
+                 <span  th:text="${currency}"></span>
+                    <span id="lblTotalShippingPrice" th:text="${order.shippingAmount}"></span>
+                </span>
+            </div>
+            
+
+             
+            
+            <div  id="divGatewayCharges" style="padding: 10px 0px; border-top: 1px solid rgb(51, 51, 51);">
+                <span style="display: inline-block; font-size: 14px; width: 75%; text-align: right;"><b>Discount Amount</b></span>
+                <span style="float: right; font-size: 14px; text-align: right; font-weight: bold;">
+                <span  th:text="${currency}"></span>
+                    <span th:text="${order.discountAmount}" id="lblGatewayCharges" ></span>
+                </span>
+            </div>
+            
+            
+              <div th:if="${order.additionalMedicalharge >0}"  id="divGatewayCharges" style="padding: 10px 0px; border-top: 1px solid rgb(51, 51, 51);">
+                <span style="display: inline-block; font-size: 14px; width: 75%; text-align: right;"><b>Consultation Fees</b></span>
+                <span style="float: right; font-size: 14px; text-align: right; font-weight: bold;">
+                <span  th:text="${currency}"></span>
+                    <span th:text="${order.additionalMedicalharge}" id="lblGatewayCharges" ></span>
+                </span>
+            </div>
+            
+              <div th:if="${order.partialPaid ==1}"  id="divGatewayCharges" style="padding: 10px 0px; border-top: 1px solid rgb(51, 51, 51);">
+                <span style="display: inline-block; font-size: 14px; width: 75%; text-align: right;"><b>Partial Paid Amount</b></span>
+                <span style="float: right; font-size: 14px; text-align: right; font-weight: bold;">
+                <span  th:text="${currency}"></span>
+                    <span th:text="${order.partialPaidAmount}" id="lblGatewayCharges" ></span>
+                </span>
+            </div>
+            
+                <div   id="divGatewayCharges" style="padding: 10px 0px; border-top: 1px solid rgb(51, 51, 51);">
+                <span style="display: inline-block; font-size: 14px; width: 75%; text-align: right;"><b>Total Due</b></span>
+                <span style="float: right; font-size: 14px; text-align: right; font-weight: bold;">
+                <span  th:text="${currency}"></span>
+                    <span th:text="${order.remainingBalance}" id="lblGatewayCharges" ></span>
+                </span>
+            </div>
+            
+            
+           
+
+            
+<div id="divIGST" style="padding: 10px 0px; border-top: 1px solid rgb(51, 51, 51); display: none;">
+                <span style="display: inline-block; font-size: 14px; width: 75%; text-align: right;"><b>IGST</b></span>
+                <span style="float: right; font-size: 14px; text-align: right; font-weight: bold;">
+                    <span id="lblIGST"  th:text="${order.taxAmount}" >255.50 </span> <span  th:text="${currency}"></span>
+                </span>
+            </div>           
+            
+<div style="border-top: 1px solid rgb(51, 51, 51); border-bottom: 1px solid rgb(51, 51, 51); padding: 10px 0px;">
+                <span style="display: inline-block; font-size: 20px; width: 75%; text-align: right;"><b>Grand Total</b></span>
+                <span style="float: right; font-size: 20px; text-align: right; font-weight: bold;">
+                <span  th:text="${currency}"></span>
+                     <span id="lblGrandTotal" th:text="${order.grandTotal}"></span>
+                </span>
+            </div>
+            
+               
+            
+        </div>
+<div class="mallbery-caa" style="position: fixed; z-index: 2147483647 !important; text-transform: none !important;" /></body></html>
